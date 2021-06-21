@@ -122,6 +122,21 @@ On OpenBSD, the xen drivers are also already part of the kernel. The `install.sh
 For OpenBSD search [the forum](https://xcp-ng.org/forum). See for example [this thread](https://xcp-ng.org/forum/topic/2582/guest-tools-for-openbsd).
 :::
 
+## NetBSD
+
+On NetBSD xen drivers and tools are in pkgsrc in sysutils/xe-guest-utilities. You can install it from sources:
+```
+cd /usr/pkgsrc/sysutils/xe-guest-utilities
+make install clean
+cp /usr/pkg/share/example/rc.d/xenguest /etc/rc.d/
+echo "xenguest=YES" >> /etc/rc.conf
+```
+or prebuilt package by pkgin:
+```
+pkgin install xe-guest-utilities
+```
+and add it to rc.conf same way as from sources to start it on boot.
+
 ## FreeNAS/TrueNAS
 
 FreeNAS is a locked-down version of FreeBSD, with many packages disabled to ensure a more stable environment for the fileserver. `xe-guest-utilities` is part of the packages that are **not** available in FreeNAS. But because it's based on FreeBSD, the packages from that OS can be installed, at your own risk. This is not a big issue for this particular package, because it's a _leaf_ in the chain of dependencies - nothing in FreeNAS depends on it.
